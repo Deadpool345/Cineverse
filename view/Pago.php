@@ -69,10 +69,11 @@ $compactada=urlencode($compactad);
 <!DOCTYPE HTML>
 <html>
 <head>
+<script src="https://cdn.tailwindcss.com"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cine World</title>
 
-<link href="templatemo_style.css" rel="stylesheet" type="text/css" />
+
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <link rel="stylesheet" href="css/slimbox2.css" type="text/css" media="screen" /> 
@@ -89,31 +90,32 @@ function clearText(field)
 
 
 </head>
-<body>
-<div id="templatemo_body_wrapper">
-<div id="templatemo_wrapper">
-	<div id="templatemo_header">
-    	<div id="site_title"  ><h1><img width="150" height="100" src="images/Logo1.webp"/></h1></div>
-        <div class="col_4 right">
-        	<a href="https://www.facebook.com/templatemo"><img src="images/templatemo_facebook.png" alt="Facebook" /></a>
-            <a href="#"><img src="images/templatemo_google.png" alt="Google" /></a>
-            <a href="#"><img src="images/templatemo_skype.png" alt="Skype" /></a>
-            <a href="#"><img src="images/templatemo_twitter.png" alt="Twitter" /></a>
-        </div>
-    </div>
-    <div id="templatemo_menu">
-    	   <ul>
-            <li><a href="index.php" >Inicio</a></li>
-            <li><a href="horarios.php">Horarios</a></li>
-            <li><a href="proxim.php">Prox. Estrenos</a></li>
-            <li><a href="Snacks.php">Snaks</a></li>
-            <li><a href="contacto.php">Contacto</a></li>
-        </ul>
+<body class="bg-[#9290C3] text-white">
+<div id="templatemo_body_wrapper " class="mx-auto p-20">
+<header class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <img src="imag/logo.png" alt="Cine World Logo" class="w-24 h-auto">
+                
+            </div>
+            <div class="flex space-x-4">
+                <a href="https://www.facebook.com/templatemo" class="hover:opacity-75"><img src="images/templatemo_facebook.png" alt="Facebook" class="w-8 h-8"></a>
+                <a href="#" class="hover:opacity-75"><img src="images/templatemo_google.png" alt="Google" class="w-8 h-8"></a>
+                <a href="#" class="hover:opacity-75"><img src="images/templatemo_skype.png" alt="Skype" class="w-8 h-8"></a>
+                <a href="#" class="hover:opacity-75"><img src="images/templatemo_twitter.png" alt="Twitter" class="w-8 h-8"></a>
+            </div>
+        </header>
 
-        
-        
-    </div>
-    <div id="templatemo_middle" align="center">
+        <nav class="bg-gray-800 text-white py-2 px-4 rounded mb-6">
+            <ul class="flex space-x-4 justify-center">
+                <li><a href="index.php" class="hover:text-gray-300">Inicio</a></li>
+                <li><a href="horarios.php" class="hover:text-gray-300">Horarios</a></li>
+                <li><a href="proxim.php" class="hover:text-gray-300">Prox. Estrenos</a></li>
+                <li><a href="Snacks.php" class="hover:text-gray-300">Snacks</a></li>
+                <li><a href="contacto.php" class="hover:text-gray-300">Contacto</a></li>
+            </ul>
+        </nav>
+
+		<main class="bg-[#1B1A55] p-6 rounded-lg shadow-md">
 
 <form name="form" method="POST" onsubmit="return validar()" action="fullbuy.php?arr=<?php echo $compactada;?>" enctype="multipart/form-data"/>
  	<table   style="border-radius: 10px; width: 1000px;" >
@@ -137,13 +139,13 @@ function clearText(field)
 	<img width="250" height="440" name="imagen"height="200" src="<?php echo $row1['foto']; ?>">
 
 </td>
-<td width="250">
+<td width="250" class="p-10">
 		<br>
-	<b style="color:white;"><h3><?php echo "$pelicula"; ?></h3></b><p></p>
-	<label style="color:#fbcf4c;">Fecha: </label><b style="color:white;"><?php echo "$fecha"; ?></b><p></p>
-	<label style="color:#fbcf4c;">Sala: </label><b style="color:white;"><?php echo "$sala"; ?></b><p></p>
-	<label style="color:#fbcf4c;">Hora: </label><b style="color:white;"><?php echo "$hora"; ?></b><p></p>
-	<label style="color:#fbcf4c;">No.asientos: </label><b style="color:white;"><?php echo "$boleto"; ?></b><p></p>
+	<b class="text-2xl text-[#fbcf4c]"><h3><?php echo "$pelicula"; ?></h3></b><p></p>
+	<label  class="text-xl text-[#fbcf4c]">Fecha: </label><b class="text-xl"><?php echo "$fecha"; ?></b><p></p>
+	<label  class="text-xl text-[#fbcf4c]">Sala: </label><b class="text-xl"><?php echo "$sala"; ?></b><p></p>
+	<label class="text-xl text-[#fbcf4c]">Hora: </label><b class="text-xl"><?php echo "$hora"; ?></b><p></p>
+	<label  class="text-xl text-[#fbcf4c]">No.asientos: </label><b class="text-xl"><?php echo "$boleto"; ?></b><p></p>
 	
 
 
@@ -153,12 +155,19 @@ function clearText(field)
 	
 		<td 	 width="400" align="center" >
 <img src="imag/tarjetas.png" ><p></p>
-<h2><labe style="color:#fbcf4c;"l>Total a pagar: </label><b style="color:red"><?php echo "$","$total",".00"; ?></b> </h2>
-<b style="color:white;">No.tarjeta:</b><input type="text" placeholder="16 digitos" name="notarjeta" onkeypress="solonumeros()" maxlength="16" size="16" />
-  <b style="color:white;">Digitos:</b><input type="text" placeholder="3 digitos" name="digito" onkeypress="solonumeros()" maxlength="3" size="3" /><p></p>
+<h2><labe class="text-green-700 text-xl">Total a pagar: </label><b style="color:red"><?php echo "$","$total",".00"; ?></b> </h2>
+<div class="mb-4">
+                <label class="block text-[#9290C3] text-sm font-bold mb-2" for="notarjeta">No. tarjeta:</label>
+                <input type="text" id="notarjeta" name="notarjeta" placeholder="16 dígitos" onkeypress="solonumeros(event)" maxlength="16" size="16" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+            </div>
+			<div class="mb-4">
+                <label class="block text-[#9290C3] text-sm font-bold mb-2" for="digito">Dígitos:</label>
+                <input type="text" id="digito" name="digito" placeholder="3 dígitos" onkeypress="solonumeros(event)" maxlength="3" size="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+            </div>
 
-<button id="AP" type="submit"><strong>PAGAR</strong></button><p></p>
-		<button id="CP"type="reset">Borrar</button>
+
+<button id="AP" type="submit" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded"><strong>PAGAR</strong></button><p></p>
+		<button class="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded mt-5"  id="CP"type="reset">Borrar</button>
 
 	<?php  
 		// $trj= $_POST['notarjeta'];
@@ -195,18 +204,18 @@ function clearText(field)
 	</form>
 <div>
 	
-	<a href="index.php"><button id="CP"><strong>Cancelar compra</strong></button></a>
+	<a href="index.php"class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded "><button id="CP" ><strong>Cancelar compra</strong></button></a>
 </div>
    
         
       
         
         <div class="clear"></div>
-    </div>
+</main>
     <div id="templatemo_footer">
     <div class="col_2 left">Son las decisiones las que nos hacen ser quienes somos, y siempre podemos optar por hacer lo correcto.
-            <a href="#">Cineverse</a> |    <a href="#">Siguenos en Twitter</a> <br> 
-            Copyright©  <a href="#">CineVERSE</a>
+            <a href="#">#CineIDDS</a> |    <a href="#">Siguenos en Twitter</a> <br> 
+            Copyright©  <a href="#">Cine IDDS</a>
         </div> 
     </div>
 </div>

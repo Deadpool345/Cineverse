@@ -45,7 +45,7 @@ $apell=$row1['apellido'];
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cine World</title>
-
+<script src="https://cdn.tailwindcss.com"></script>
 <link href="templatemo_style.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -63,196 +63,87 @@ function clearText(field)
 
 
 </head>
-<body>
-<div id="templatemo_body_wrapper">
-<div id="templatemo_wrapper">
-  <div id="templatemo_header">
-      <div id="site_title"  ><h1><img width="150" height="100" src="images/Logo1.webp"/></h1></div>
-        <div class="col_4 right">
-          <a href="https://www.facebook.com/templatemo"><img src="images/templatemo_facebook.png" alt="Facebook" /></a>
-            <a href="#"><img src="images/templatemo_google.png" alt="Google" /></a>
-            <a href="#"><img src="images/templatemo_skype.png" alt="Skype" /></a>
-            <a href="#"><img src="images/templatemo_twitter.png" alt="Twitter" /></a>
+<body class="bg-[#9290C3]">
+    <div class="min-h-screen flex flex-col items-center justify-center">
+        <div class="bg-[#1B1A55] rounded-lg shadow-lg p-8">
+            <div class="text-center mb-8">
+                <img src="imag/logo.png" alt="Cine World Logo" class="w-36 h-24 mx-auto">
+              
+            </div>
+
+            <div class="text-center mb-8">
+                <?php 
+                if ($row1 > 0 && $total < $tot) {
+                    for ($i = 0; $i < count($arr_use); $i++) {
+                        if ($arr_use[$i] == "Y") {
+                            unset($arr_use[$i + 1]);
+                        }
+                    }
+
+                    $new_array = array_values($arr_use);
+                    $aRays = $new_array;
+
+                    for ($contador = 0; $contador < count($new_array); $contador++) {
+                        $query = "UPDATE funciones SET disponible='Ok' WHERE pelicula='$pelicula' AND hora='$hora' AND sala='$sala' AND fecha='$fecha' AND asientos=$aRays[$contador]";
+                        $resultado = $mysqli->query($query);
+
+                        $query1 = "UPDATE funciones SET recervo='$nomb $apell' WHERE pelicula='$pelicula' AND hora='$hora' AND sala='$sala' AND fecha='$fecha' AND asientos=$aRays[$contador]";
+                        $resultado1 = $mysqli->query($query1);
+
+                        $query2 = "UPDATE funciones SET fechcompra='$hoy' WHERE pelicula='$pelicula' AND hora='$hora' AND sala='$sala' AND fecha='$fecha' AND asientos=$aRays[$contador]";
+                        $resultado2 = $mysqli->query($query2);
+                    }
+
+                    echo "<div class='text-center '>";
+                    echo "<h2 class='text-2xl text-yellow-400'>Compra efectuada</h2><br>";
+                    echo "<h3 class='text-xl'>Reservada a nombre de: $nomb $apell</h3><br>";
+
+                    echo "<a href='recibo.php?folio=$folio&nombre=$nomb&apellido=$apell&hora=$hora&fecha=$fecha&termina=$termina&hoy=$hoy' class='inline-block bg-blue-500 text-white py-2 px-4 rounded'>Imprimir recibo</a>";
+                    echo "</div>";
+
+                    $count = 0;
+                    echo "<div class='p-10 '>";
+                    for ($contador = 0; $contador < count($new_array); $contador++) {
+                        echo "<div class='bg-auto  bg-center bg-no-repeat' style='background-image: url(imag/boletii.png);'>";
+                        echo "<div class='p-40  ' >";
+                        echo "<h3 class='text-black text-base font-bold'>$pelicula</h3>";
+                        echo "<p class='text-black text-base font-bold'>Sala: $sala</p>";
+                        echo "<p class='text-black text-base font-bold'>Hora: $hora</p>";
+                        echo "<p class='text-black text-base font-bold'>Fecha: $fecha</p>";
+                        echo "<p class='text-black text-base font-bold'>Asiento No: $aRays[$contador]</p>";
+                        echo "<p class='text-red-900 text-base font-bold'>No.folio: $folio</p>";
+                        echo "<p class='text-black text-base font-bold'>$hoy</p>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                    echo "</div>";
+                } else {
+                    echo "<div class='text-center'>";
+                    echo "<h2 class='text-2xl text-red-500'>Datos incorrectos, verifiquelos</h2>";
+                    echo "<input type='button' class='bg-red-500 text-white py-2 px-4 rounded' value='Volver atrás' onClick='history.go(-1);'>";
+                    echo "</div>";
+                }
+
+                if ($row1 > 0 && $total > $tot) {
+                    echo "<div class='text-center text-red-500'>";
+                    echo "Verifique su saldo<br>";
+                    echo "</div>";
+                }
+                ?>
+            </div>
+
+            <div class="text-center mt-8">
+                <h2 class="text-xl">Atte. CineVerse</h2>
+                <img src="imag/logo.png" alt="Cine World Logo" class="w-36 h-24 mx-auto">
+            </div>
         </div>
     </div>
-    <div id="templatemo_menu">
-      <ul>
-            <li><a href="index.php" >Inicio</a></li>
-            <li><a href="horarios.php">Horarios</a></li>
-            <li><a href="proxim.php">Prox. Estrenos</a></li>
-            
-            <li><a href="contacto.php">Contacto</a></li>
-        </ul>
-        
-        
+
+    <div class="text-center text-white mt-8">
+        Son las decisiones las que nos hacen ser quienes somos, y siempre podemos optar por hacer lo correcto.
+        <a href="#" class="text-blue-400">#CineIDDS</a> | <a href="#" class="text-blue-400">Síguenos en Twitter</a> <br> 
+        Copyright© <a href="#" class="text-blue-400">Cine IDDS</a>
     </div>
- <page> <table align="center">
-
-
-
-  <?php 
-        if ($row1>0 & $total < $tot) {
-
-            for($i=0; $i<count($arr_use); $i++)
-                  {
-                     if($arr_use[$i] == "Y"){
-                         unset($arr_use[$i + 1]);
-                     }
-                              }
-
-            $new_array = array_values($arr_use);
-
-            $aRays=$new_array;
- 
-        for( $contador=0; $contador< count($new_array); $contador++ ) {
-
-                 $query="UPDATE funciones Set disponible='Ok' where pelicula='$pelicula' and 
-                    hora='$hora' and 
-                sala='$sala' and 
-                fecha='$fecha'and
-                asientos=$aRays[$contador]";
-                $resultado=$mysqli->query($query);
-
-                $query1="UPDATE funciones Set recervo='$nomb $apell' where pelicula='$pelicula' and 
-                    hora='$hora' and 
-                sala='$sala' and 
-                fecha='$fecha'and
-                asientos=$aRays[$contador]";
-                $resultado1=$mysqli->query($query1);
-
-                $query2="UPDATE funciones Set fechcompra='$hoy' where pelicula='$pelicula' and 
-                    hora='$hora' and 
-                sala='$sala' and 
-                fecha='$fecha'and
-                asientos=$aRays[$contador]";
-                $resultado2=$mysqli->query($query2);
-
-                  
-               
-
-                   
-               }
-
-                 
-               ?>
-
-              
-
-               <div  align="center" >
-          
-           <?php  echo "<label ><h1 style=color:#FFFF00>","Compra efectuada","<br></h1></label>","<br>";
-
-                  
-
-
-
-        
-           echo "<label ><h2>","Recervada a nombre de: $nomb $apell","<br></h2></label>","<br>";?>
-
-             <td  align="center">
-
-        <a href="recibo.php?folio=<?php echo $_POST['folio']; ?>&nombre=<?php echo $row1['nombre']; ?>&apellido=<?php echo $row1['apellido']; ?>&hora=<?php echo $_POST['hora']; ?>&fecha=<?php echo $_POST['fecha']; ?>&termina=<?php echo $_POST['termina']; ?>&hoy=<?php echo date("d/m/Y");
- ?>"><button id="AP">impimir recibo</button></a>
-
-         
-      </td>
-
-        </div>
-
-      <?php $count=0; 
-
-          for ($contador=0; $contador< count($new_array); $contador++) { ?>
-             <tr>           
-           <?php  if ($count<3) { $count++; ?> 
-
-                 <td align="center" style=" background-image:url(imag/boletii.png);
-                  background-repeat:no-repeat;background-size:400px 400px;" width="400" height="400" >
-                    
-                <h2 style="color:white">
-                 <?php  
-                     echo "<br>"; echo "<br>";echo "<br>";
-                  echo "","</h2>","<br>"; ?>
-                    <h3 style="color:black"><b>
-                  <?php 
-                  echo "$pelicula","<br>";
-                 echo "Sala: ","$sala","<br>";
-                   echo "Hora: ","$hora","<br>";
-                   echo "Fecha: ","$fecha","<br>";
-                     
-                     echo "Asiento No: ","$aRays[$contador]","<br></h3>";
-
-                     echo "<br>";
-                      echo "<br>";  
-                     
-                    
-                      echo "<h3><b style=color:black>","No.folio: ","</b><b style=color:red>","$folio","</b></h3>";
-                      echo "<h3><b style=color:black>","$hoy","</b></h3><br>";
-                     ?>
-
-                     <br>
-             
-                  </td>
-       
-           <?php }else{?>
-            
-            
-              </tr>
-            <tr></tr>
-              
-          <?php $count=0; }
-
-
-          }  ?><tr>
-           <td  align="center">
-
-        <a href="recibo.php?folio=<?php echo $_POST['folio']; ?>&nombre=<?php echo $row1['nombre']; ?>&apellido=<?php echo $row1['apellido']; ?>&hora=<?php echo $_POST['hora']; ?>&fecha=<?php echo $_POST['fecha']; ?>&termina=<?php echo $_POST['termina']; ?>&hoy=<?php echo date("d/m/Y");
- ?>"><button id="AP">impimir recibo</button></a>
-
-         
-      </td></tr><br><br>
-
-             
-        <?php }
-        else{ ?> <td  align="center">
-        <label ><h1 style="color:red">
-        <?php  echo "Datos incorrectos","<br>","verifiquelos";?></h1> 
-        <input type='button' id="CP" value='Volver atras' onClick='history.go(-1);'>
-           </label><br>
-           <br>
-        
-        <?php 
-          
-          
-
-      }
-if ($row1>0 AND $total>$tot) {
-           echo "Verifique su saldo","<br>";?>
-
-          
-         <?php }
-
-
-    ?>
-
-   </td><tr></tr>
-        
-      
-        
-        <td  align="center">
-          
-        <?php  echo "<h2>","Atte. ","</h2>";?>
-<img width="250" height="100" src="images/Logo1.webp"/>
-
-        </td>
-    </table></page>
-    <div id="templatemo_footer">
-    <div class="col_2 left">Son las decisiones las que nos hacen ser quienes somos, y siempre podemos optar por hacer lo correcto.
-            <a href="#">CineVerse</a> |    <a href="#">Siguenos en Twitter</a> <br> 
-            Copyright©  <a href="#">CineVerse</a>
-        </div> 
-    </div>
-</div>
-</div>
 </body>
 </html>
 <?php 
