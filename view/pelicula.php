@@ -11,18 +11,19 @@ $row = $resultado->fetch_assoc();
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="images/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CineVerse</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-[#9290C3] text-white">
-    <div class="container mx-auto ">
+    <div class="container ">
         <?php
           require('components/navbar2.php');
         ?>
 
-        <main class="mt-[2rem] p-6 rounded-lg  mb-[3rem]">
+        <main class="p-6 rounded-lg  mt-[3rem] p-6 rounded-lg  mb-[3rem]">
             <div class="flex flex-col md:flex-row">
                 <div class="md:w-1/3 mb-4 md:mb-0">
                     <img src="<?php echo $row['foto']; ?>" alt="<?php echo $row['nombre']; ?>" class="w-full h-auto rounded-lg">

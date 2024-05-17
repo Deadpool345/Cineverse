@@ -35,7 +35,11 @@ $count=0;
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1.7.3/glider.min.css">
     <script src="https://kit.fontawesome.com/5b41b5f095.js" crossorigin="anonymous"></script>
- 
+    <!-- <link href="templatemo_style.css" rel="stylesheet" type="text/css" />
+   
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<link rel="stylesheet" href="css/slimbox2.css" type="text/css" media="screen" /> 
+<script type="text/JavaScript" src="js/slimbox2.js"></script> -->
 
 <script language="javascript" type="text/javascript">
 function clearText(field)

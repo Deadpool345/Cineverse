@@ -7,14 +7,14 @@ $resultado=$mysqli->query($query);
 
 $count=0;
 
-?><!DOCTYPE HTML>
-<html>
+?>
+<!DOCTYPE HTML>
+<html lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cine IDDS</title>
-
-<link href="templatemo_style.css" rel="stylesheet" type="text/css" />
-
+<link rel="icon" href="images/logo.png">
+<script src="https://cdn.tailwindcss.com"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <link rel="stylesheet" href="css/slimbox2.css" type="text/css" media="screen" /> 
 <script type="text/JavaScript" src="js/slimbox2.js"></script> 
@@ -27,72 +27,39 @@ function clearText(field)
     else if (field.value == '') field.value = field.defaultValue;
 }
 </script>
-
-
+<style>
+  .bg-primary { background-color: #9290C3; }
+  .bg-secondary { background-color: #1B1A55; }
+  .text-highlight { color: #535C91; }
+  .text-primary { color: #070F2B; }
+</style>
 </head>
-<body>
-<div id="templatemo_body_wrapper">
-<div id="templatemo_wrapper">
-	<div id="templatemo_header">
-    	<div id="site_title"  ><h1><img width="150" height="100" src="imag/logo.png"/></h1></div>
-        <div class="col_4 right">
-        	<a href="https://www.facebook.com/templatemo"><img src="images/templatemo_facebook.png" alt="Facebook" /></a>
-            <a href="#"><img src="images/templatemo_google.png" alt="Google" /></a>
-            <a href="#"><img src="images/templatemo_skype.png" alt="Skype" /></a>
-            <a href="#"><img src="images/templatemo_twitter.png" alt="Twitter" /></a><br><br>
-         
-            
+<body class="bg-primary text-primary font-sans">
+<div class="container ">
+    <div id="templatemo_wrapper">
+        <?php
+            require('components/navbar2.php');
+        ?>
+        <div id="templatemo_middle" class="text-center py-8 mb-[3rem]">
+            <h1 class="text-4xl font-bold text-primary mb-8">Elige tu combo preferido</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <?php while($row=$resultado->fetch_assoc() ){
+                    if ($count < 3) { $count++; ?>
+                        <div class="text-center">
+                            <a href=".php?id=<?php echo $row['id']; ?>">
+                                <img class="w-36 h-48 mx-auto mb-4" src="<?php echo $row['foto'];?>" alt="<?php echo $row['nombre'];?>">
+                                <p class="text-primary font-bold"><?php echo $row['nombre'];?></p>
+                                <p class="text-primary font-bold">$<?php echo $row['costo'];?>.00</p>
+                            </a>
+                        </div>
+                    <?php } else { $count = 0; } ?>
+                <?php } ?>
+            </div>
         </div>
+        <?php
+            require('components/footer.php');
+        ?>
     </div>
-    <div id="templatemo_menu">
-    	   <ul>
-            <li><a href="index.php" >Inicio</a></li>
-            <li><a href="horarios.php">Horarios</a></li>
-            <li><a href="proxim.php">Prox. Estrenos</a></li>
-            <li><a href="Snacks.php" class="selected">Snaks</a></li>
-   
-            <li><a href="contacto.php">Contacto</a></li>
-        </ul>
-
-        
-        
-    </div>
-    <div id="templatemo_middle" align="center">
-    <table>
-    	<div>
-    		<h1>Ahora en taquilla</h1>
-    	</div>
-    		
-    		<?php while($row=$resultado->fetch_assoc() ){
-				if ($count<4) { $count++ ?>
-					<td width="200" align="center">
-							
-
-				<a  href=".php?id= <?php echo $row['id']; ?>"><img width="150" name="imagen"height="200" src="<?php echo $row['foto'];?>"><p></p></a> 
-				<a  href=".php?id= <?php echo $row['id']; ?>"><strong ><b style="color:gray"><?php echo $row['nombre'];?></b></strong><p></p> </a>
-														<strong ><b style="color:gray">$<?php echo $row['costo'];?>.00</b></strong><p></p> </a>
-
-					
-						</td>	
-			<?php	}else{?>	
-				<tr></tr>
-
-				<?php   $count=0;}?>
-										
-		<?php }?>
-      
-    
-    </table>
-        
-        <div class="clear"></div>
-    </div>
-    <div id="templatemo_footer">
-    <div class="col_2 left">Son las decisiones las que nos hacen ser quienes somos, y siempre podemos optar por hacer lo correcto.
-            <a href="#">#CineIDDS</a> |    <a href="#">Siguenos en Twitter</a> <br> 
-            Copyright©  <a href="#">Cine IDDS</a>
-        </div>  
-    </div>
-</div>
 </div>
 </body>
 </html>
