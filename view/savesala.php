@@ -43,7 +43,6 @@ function clearText(field)
 <main>
   <header>
     <nav class="navbar">
-        <a class="logo" href="#"><img class="logotipo" src="images/Logo1.webp" alt="logo"></a>
         <div class="nav-links">
           <ul>
              <li class="enlace-resp"><a href="#">Estrenos</a></li>
@@ -69,7 +68,7 @@ function clearText(field)
 <center>
 <div id="templatemo_main" align="center">
 <?php if ($resultado>0) {
-echo "<h1>La pelicula introdujo en cartelera</h1>" ;
+echo "<h1>La Sala se creo en correctamente</h1>" ;
 }else{
 echo "<h1>Error al subir $titulo</h1>";
 }

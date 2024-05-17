@@ -38,7 +38,6 @@ if(isset ($_SESSION['id'])) {?>
 <main>
   <header>
     <nav class="navbar">
-        <a class="logo" href="#"><img class="logotipo" src="images/Logo1.webp" alt="logo"></a>
         <div class="nav-links">
           <ul>
              <li class="enlace-resp"><a href="ges.php">Estrenos</a></li>
@@ -63,7 +62,7 @@ if(isset ($_SESSION['id'])) {?>
 <br><br>
 <center>
 <form name"savesala"  onsubmit="return formu(this)" method="POST" action="savesala.php" enctype="multipart/form-data" class="form-register">
-<img src="images/Logo1.webp" width="350px" height="145px" class="logo">
+<img src="images/logo.png" alt="" height="100px" width="100px" class="logo-form">
     <br>
         <h2 class="title-form">SALAS</h2>
         <br>

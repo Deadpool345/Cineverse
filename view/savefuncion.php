@@ -71,7 +71,6 @@ if(isset ($_SESSION['id'])) {?>
 <main>
   <header>
     <nav class="navbar">
-        <a class="logo" href="#"><img class="logotipo" src="images/Logo1.webp" alt="logo"></a>
         <div class="nav-links">
           <ul>
              <li class="enlace-resp"><a href="ges.php">Estrenos</a></li>
