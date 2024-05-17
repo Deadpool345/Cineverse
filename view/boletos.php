@@ -1,192 +1,148 @@
 <?php
 
-
 require('conexion.php');
 
-$id=$_GET['id'];
+$id = $_GET['id'];
+$hora = $_GET['hora'];
+$sala = $_GET['sala'];
+$fecha = $_GET['fecha'];
 
-$hora=$_GET['hora'];
-$sala=$_GET['sala'];
-$fecha=$_GET['fecha'];
+$query = "SELECT * FROM cartelera WHERE nombre='$id'";
+$resultado = $mysqli->query($query);
+$row = $resultado->fetch_assoc();
 
-$query="SELECT * from cartelera where nombre='$id'";
-$resultado=$mysqli->query($query);
-$row=$resultado->fetch_assoc();
+$peli = $row['nombre'];
 
-$peli=$row['nombre'];
+$query1 = "SELECT * FROM funcion WHERE pelicula='$id' AND hora='$hora' AND sala='$sala' AND fecha='$fecha'";
+$resultado1 = $mysqli->query($query1);
+$row1 = $resultado1->fetch_assoc();
 
-	 
+$peli = $row1['pelicula'];
+$sala = $row1['sala'];
+$hora = $row1['hora'];
+$fecha = $row1['fecha'];
 
-$query1="SELECT * from funcion where pelicula='$id' And hora='$hora' and 
-sala='$sala' and fecha='$fecha'";
-$resultado1=$mysqli->query($query1);
-$row1=$resultado1->fetch_assoc();
+$query2 = "SELECT * FROM funciones WHERE pelicula='$peli' AND hora='$hora' AND sala='$sala' AND fecha='$fecha'";
+$resultado2 = $mysqli->query($query2);
 
-$peli=$row1['pelicula'];
-$sala=$row1['sala'];
-$hora=$row1['hora'];
-$fecha=$row1['fecha'];
-
-$query2="SELECT * from funciones where 
-pelicula='$peli' and 
-hora='$hora' and 
-sala='$sala' and
-fecha='$fecha'";
-$resultado2=$mysqli->query($query2);
-
-
-
-
- 				
 ?>
 
 <!DOCTYPE HTML>
-<html>
+<html lang="es">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Cine IDDS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cine IDDS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/slimbox2.css" type="text/css" media="screen" />
+    <script src="js/slimbox2.js"></script>
+    <script src="funciones.js"></script>
+    <script>
+        function clearText(field) {
+            if (field.defaultValue == field.value) field.value = '';
+            else if (field.value == '') field.value = field.defaultValue;
+        }
 
-<link href="templatemo_style.css" rel="stylesheet" type="text/css" />
+        function sumar() {
+            var boletoInput = document.getElementsByName('boleto')[0];
+            var precioInput = document.getElementsByName('precio')[0];
+            var costoInput = document.getElementsByName('costo')[0];
+            
+            var cantidad = parseInt(boletoInput.value);
+            var costo = parseInt(costoInput.value);
 
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<link rel="stylesheet" href="css/slimbox2.css" type="text/css" media="screen" /> 
-<script type="text/JavaScript" src="js/slimbox2.js"></script> 
-<script type="text/JavaScript" src="funciones.js"></script>
+            boletoInput.value = cantidad + 1;
+            precioInput.value = (cantidad + 1) * costo;
+        }
 
-<script language="javascript" type="text/javascript">
-function clearText(field)
-{
-    if (field.defaultValue == field.value) field.value = '';
-    else if (field.value == '') field.value = field.defaultValue;
-}
-</script>
+        function restar() {
+            var boletoInput = document.getElementsByName('boleto')[0];
+            var precioInput = document.getElementsByName('precio')[0];
+            var costoInput = document.getElementsByName('costo')[0];
 
+            var cantidad = parseInt(boletoInput.value);
+            var costo = parseInt(costoInput.value);
 
+            if (cantidad > 1) {
+                boletoInput.value = cantidad - 1;
+                precioInput.value = (cantidad - 1) * costo;
+            }
+        }
+    </script>
 </head>
-<body>
-<div id="templatemo_body_wrapper">
-<div id="templatemo_wrapper">
-  <div id="templatemo_header">
-      <div id="site_title"  ><h1><img width="150" height="100" src="images/Logo1.webp"/></h1></div>
-        <div class="col_4 right">
-          <a href="https://www.facebook.com/templatemo"><img src="images/templatemo_facebook.png" alt="Facebook" /></a>
-            <a href="#"><img src="images/templatemo_google.png" alt="Google" /></a>
-            <a href="#"><img src="images/templatemo_skype.png" alt="Skype" /></a>
-            <a href="#"><img src="images/templatemo_twitter.png" alt="Twitter" /></a>
-        </div>
+<body class="bg-[#9290C3] text-white">
+    <div class="container mx-auto p-4">
+        <header class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <img src="imag/logo.png" alt="Cine IDDS Logo" class="w-24 h-auto">
+                <h1 class="text-2xl font-bold ml-4">Cine IDDS</h1>
+            </div>
+            <div class="flex space-x-4">
+                <a href="https://www.facebook.com/templatemo" class="hover:opacity-75"><img src="images/templatemo_facebook.png" alt="Facebook" class="w-8 h-8"></a>
+                <a href="#" class="hover:opacity-75"><img src="images/templatemo_google.png" alt="Google" class="w-8 h-8"></a>
+                <a href="#" class="hover:opacity-75"><img src="images/templatemo_skype.png" alt="Skype" class="w-8 h-8"></a>
+                <a href="#" class="hover:opacity-75"><img src="images/templatemo_twitter.png" alt="Twitter" class="w-8 h-8"></a>
+            </div>
+        </header>
+
+        <nav class="bg-gray-800 text-white py-2 px-4 rounded mb-6">
+            <ul class="flex space-x-4 justify-center">
+                <li><a href="index.php" class="hover:text-gray-300">Inicio</a></li>
+                <li><a href="horarios.php" class="hover:text-gray-300">Horarios</a></li>
+                <li><a href="proxim.php" class="hover:text-gray-300">Prox. Estrenos</a></li>
+                <li><a href="Snacks.php" class="hover:text-gray-300">Snacks</a></li>
+                <li><a href="contacto.php" class="hover:text-gray-300">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <main class="bg-[#070F2B] p-6 rounded-lg shadow-md">
+            <form name="ad" method="POST" action="asientos.php" enctype="multipart/form-data">
+                <table class="w-full text-white">
+                    <tr>
+                        <td class="align-top w-1/3">
+                            <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                            <img src="<?php echo $row['foto']; ?>" alt="<?php echo $row['nombre']; ?>" class="w-full h-auto rounded-lg">
+                        </td>
+                        <td class="align-top w-1/3 px-6">
+                            <div>
+                                <h1 class="text-3xl font-bold mb-2"><?php echo $row['nombre']; ?></h1>
+                                <p class="mb-2"><strong>Género:</strong> <?php echo $row['genero']; ?></p>
+                                <p class="mb-2"><strong>Clasificación:</strong> <?php echo $row['clasificacion']; ?></p>
+                                <p class="mb-2"><strong>Duración:</strong> <?php echo $row['duracion']; ?> Min</p>
+                                <p class="mb-2"><strong>Precio:</strong> <input id="matraca" size="3" readonly class="bg-transparent border-none text-green-500" type="text" name="costo" value="<?php echo $row['cost']; ?>" /> pesos</p>
+                            </div>
+                        </td>
+                        <td class="align-top w-1/3">
+                            <h2 class="text-xl font-semibold mb-4">Boletos a comprar</h2>
+                            <input type="hidden" value="<?php echo "$count" ?>" name="cont"/>
+                            <div class="flex items-center mb-4">
+                                <button type="button" id="bote" onclick="restar()" class="bg-gray-700 text-white px-2 py-1 rounded-l">-</button>
+                                <input id="matraca" size="1" class="bg-gray-800 text-orange-500 text-center border-none w-12" type="text" readonly name="boleto" value="1"/>
+                                <button type="button" id="bote" onclick="sumar()" class="bg-gray-700 text-white px-2 py-1 rounded-r">+</button>
+                            </div>
+                            <p class="mb-4">Total: <input id="matraca" size="3" class="bg-transparent border-none text-orange-500" readonly type="text" name="precio" value="<?php echo $row['cost']; ?>" /> pesos</p>
+
+                            <input type="hidden" name="id" value="<?php echo $row1['pelicula']; ?>" />
+                            <input type="hidden" name="hora" value="<?php echo $row1['hora']; ?>" />
+                            <input type="hidden" name="fecha" value="<?php echo $row1['fecha']; ?>" />
+                            <input type="hidden" name="sala" value="<?php echo $row1['sala']; ?>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-center py-4">
+                            <button type="submit" id="AP" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded mr-2">OK</button>
+                            <a href="index.php" class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded">Cancelar compra</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </main>
+
+        <footer class="mt-6 text-center">
+            <p class="mt-4">Son las decisiones las que nos hacen ser quienes somos, y siempre podemos optar por hacer lo correcto. <a href="#" class="underline">#CineIDDS</a> | <a href="#" class="underline">Síguenos en Twitter</a></p>
+            <p>Copyright© <a href="#" class="underline">Cine IDDS</a></p>
+        </footer>
     </div>
-    <div id="templatemo_menu">
-      <ul>
-            <li><a href="index.php">Inicio</a></li>
-            <li><a href="horarios.php">Horarios</a></li>
-            <li><a href="proxim.php">Prox. Estrenos</a></li>
-         
-          
-            <li><a href="contacto.php">Contacto</a></li>
-        </ul>
-        
-        
-    </div>
-    <div id="templatemo_middle">
-
-<form name="ad"    method="POST" action="asientos.php" enctype="multipart/form-data">
-	<table id="table" >
-	<td  width="150"align="top">
-			 	 <input type="hidden" name="id" value="<?php echo $id;?>"/>
-			 	<img width="250" height="400" src="<?php echo $row['foto'];?>"></td>
-			 	
-		<td width="200">
-	<b>Titulo:</b>
-              <input type="hidden" name="titulo" value="<?php echo $row['nombre'];?>" size="33"/>                   
-               <label><?php echo $row['nombre'];?></label> <p></p>
-              		<b>Genero:</b>
-              
-              		<label><?php echo $row['genero'];?></label> <p></p>
-              		<b>Clasificacion:</b>
-              
-              		<label><?php echo $row['clasificacion'];?></label> <p></p>
-              			 <b>Duracion:</b>
-                  		<label><?php echo $row['duracion'];?></label> <p></p>
-
-                  		<label><b>Precio:</b></label>
-                  		<input id="matraca" size="3" readonly="readonly"  style="color:green" type="text" name="costo" value="<?php echo $row['cost']?>"/><b>pesos</b>
-</td>
-	
-	
-
-
-
-
-
-
-<td  align="center" >
-
-<?php
-
- $count=0; while ($row2=$resultado2->fetch_assoc()){  
- 			
- 				if (empty($row1['disponible'])) {    ?>
-
- 	<input   type="hidden" width="40" name="disp" value="" />
- 					<?php  $count++;}
- 					  }?>
-
- 
- <label><h2>Boletos a comprar</h2></label><p></p>
- <input type="hidden" value="<?php echo "$count" ?>" name="cont"/>
-
-<input id="bote" type="text"  onclick="restar()" value="-"  readonly="readonly"/> 
-<input id="matraca" size="1" style="color:orange" type="text" readonly="readonly" name="boleto"value="1"/>
-
-<input id="bote" type="text" onclick="sumar()" value="+"  readonly="readonly"/><p></p>
-
-<label>Total:</label><input id="matraca" size="3" style="color:orange" readonly="readonly"  type="text" name="precio" value="<?php echo $row['cost']?>"/><label>Pesos</label>
-
-
-	<p></p>
-	
-<input type="hidden" name="id" value="<?php echo $row1['pelicula'];?>" />
-	<input type="hidden" name="hora" value="<?php echo $row1['hora'];?>"/>
-	<input type="hidden" name="fecha" value="<?php echo $row1['fecha'];?>" />
-	<input type="hidden" name="sala" value="<?php echo $row1['sala']; ?>" />
-
-		
-
-	<td align="center" colspan="3">
-		 <button id="AP"><strong>OK</strong></button>	<p></p>
-      <label>Escoje el numero de boletos que </label><p></p>
-      <label>compraras y pulsa OK para escojer asientos</label>
-
-	</td>
-
-		</table>
-</form>
-<table>
-	<tr align="right">
-		
-		<td align="right">
-			
-			 <a href="index.php"><button id="CP"><strong>Cancelar compra</strong></button></a>
-		</td>
-	</tr>	
-</table>
-
-
-   
-        
-        <div class="col_2 right">
-         
-        </div>    
-        
-        <div class="clear"></div>
-    </div>
-    <div id="templatemo_footer">
-    <div class="col_2 left">Son las decisiones las que nos hacen ser quienes somos, y siempre podemos optar por hacer lo correcto.
-            <a href="#">Cineverse</a> |    <a href="#">Siguenos en Twitter</a> <br> 
-            Copyright©  <a href="#">Cineverse</a>
-        </div> 
-    </div>
-</div>
-</div>
 </body>
 </html>

@@ -1,152 +1,86 @@
 <?php
 
-
 require('conexion.php');
 
-$id=$_GET['id'];
+$id = $_GET['id'];
 
+$query = "SELECT * from cartelera where id='$id'";
+$resultado = $mysqli->query($query);
+$row = $resultado->fetch_assoc();
 
-$query="SELECT * from cartelera where id='$id'";
-$resultado=$mysqli->query($query);
-$row=$resultado->fetch_assoc();
+$peli = $row['nombre'];
 
-$peli=$row['nombre'];
-	 
+$query1 = "SELECT * from funcion where pelicula='$peli'";
+$resultado1 = $mysqli->query($query1);
 
-$query1="SELECT * from funcion where pelicula='$peli'";
-$resultado1=$mysqli->query($query1);
-
-
-$contador=0;
+$contador = 0;
 
 ?>
 
 <!DOCTYPE HTML>
-<html>
+<html lang="es">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Cine IDDS</title>
-
-<link href="templatemo_style.css" rel="stylesheet" type="text/css" />
-
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<link rel="stylesheet" href="css/slimbox2.css" type="text/css" media="screen" /> 
-
-<script type="text/JavaScript" src="js/slimbox2.js"></script> 
-
-<script language="javascript" type="text/javascript">
-function clearText(field)
-{
-    if (field.defaultValue == field.value) field.value = '';
-    else if (field.value == '') field.value = field.defaultValue;
-}
-</script>
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cine IDDS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<div id="templatemo_body_wrapper">
-<div id="templatemo_wrapper">
-  <div id="templatemo_header">
-      <div id="site_title"  ><h1><img width="150" height="100" src="images/Logo1.webp"/></h1></div>
-        <div class="col_4 right">
-          <a href="https://www.facebook.com/templatemo"><img src="images/templatemo_facebook.png" alt="Facebook" /></a>
-            <a href="#"><img src="images/templatemo_google.png" alt="Google" /></a>
-            <a href="#"><img src="images/templatemo_skype.png" alt="Skype" /></a>
-            <a href="#"><img src="images/templatemo_twitter.png" alt="Twitter" /></a>
-        </div>
+<body class="bg-[#9290C3] text-white">
+    <div class="container mx-auto p-4">
+        <header class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <img src="imag/logo.png" alt="Cine IDDS Logo" class="w-24 h-auto">
+               
+            </div>
+            <div class="flex space-x-4">
+                <a href="https://www.facebook.com/templatemo" class="hover:opacity-75"><img src="images/templatemo_facebook.png" alt="Facebook" class="w-8 h-8"></a>
+                <a href="#" class="hover:opacity-75"><img src="images/templatemo_google.png" alt="Google" class="w-8 h-8"></a>
+                <a href="#" class="hover:opacity-75"><img src="images/templatemo_skype.png" alt="Skype" class="w-8 h-8"></a>
+                <a href="#" class="hover:opacity-75"><img src="images/templatemo_twitter.png" alt="Twitter" class="w-8 h-8"></a>
+            </div>
+        </header>
+
+        <nav class="bg-gray-800 text-white py-2 px-4 rounded mb-6">
+            <ul class="flex space-x-4 justify-center">
+                <li><a href="index.php" class="hover:text-gray-300">Inicio</a></li>
+                <li><a href="horarios.php" class="hover:text-gray-300">Horarios</a></li>
+                <li><a href="proxim.php" class="hover:text-gray-300">Prox. Estrenos</a></li>
+                <li><a href="Snacks.php" class="hover:text-gray-300">Snacks</a></li>
+                <li><a href="contacto.php" class="hover:text-gray-300">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <main class="bg-[#070F2B] p-6 rounded-lg shadow-md">
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/3 mb-4 md:mb-0">
+                    <img src="<?php echo $row['foto']; ?>" alt="<?php echo $row['nombre']; ?>" class="w-full h-auto rounded-lg">
+                </div>
+                <div class="md:w-2/3 md:ml-6">
+                    <h1 class="text-3xl font-bold mb-2"><?php echo $row['nombre']; ?></h1>
+                    <div class="mb-4">
+                        <p><strong>Género:</strong> <?php echo $row['genero']; ?></p>
+                        <p><strong>Clasificación:</strong> <?php echo $row['clasificacion']; ?></p>
+                        <p><strong>Duración:</strong> <?php echo $row['duracion']; ?> Min</p>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Horarios</h3>
+                        <?php $count = 0; while ($row1 = $resultado1->fetch_assoc()) { $count++; ?>
+                            <p>
+                                <strong>El <?php echo $row1['fecha']; ?> a las:</strong>
+                                <a href="boletos.php?id=<?php echo $row1['pelicula']; ?>&hora=<?php echo $row1['hora']; ?>&fecha=<?php echo $row1['fecha']; ?>&sala=<?php echo $row1['sala']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-2 rounded ml-2"><?php echo $row1['hora']; ?> horas</a>
+                            </p>
+                        <?php } if ($count == 0) { ?>
+                            <p>No disponibles</p>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="mt-6 text-center">
+            <p class="mt-4">Son las decisiones las que nos hacen ser quienes somos, y siempre podemos optar por hacer lo correcto. <a href="#" class="underline">#CineIDDS</a> | <a href="#" class="underline">Síguenos en Twitter</a></p>
+            <p>Copyright© <a href="#" class="underline">Cine IDDS</a></p>
+        </footer>
     </div>
-    <div id="templatemo_menu">
-      <ul>
-            <li><a href="index.php">Inicio</a></li>
-            <li><a href="horarios.php">Horarios</a></li>
-            <li><a href="proxim.php">Prox. Estrenos</a></li>
-           <li><a href="contacto.php">Contacto</a></li>
-        </ul>
-        
-        
-    </div>
-    <div id="templatemo_middle">
-
-<table id="table" >
-	<td  width="150"align="right">
-			
-			 	<img width="250" height="400" src="<?php echo $row['foto'];?>"></td>
-			 	
-		<td width="300">
-	<b>Titulo:</b>
-                                 
-               <label><?php echo $row['nombre'];?></label> <p></p>
-              		<b>Genero:</b>
-              
-              		<label><?php echo $row['genero'];?></label> <p></p>
-              		<b>Clasificacion:</b>
-              
-              		<label><?php echo $row['clasificacion'];?></label> <p></p>
-               <b>Duracion:</b>
-                  		<label><?php echo $row['duracion'];?></label> 
-</td>
-	
-	
-
-
-
-
-
-
-<td  align="center" width="300">
-		<label ><h3>HORARIOS</h3></label><p></p>
-	<?php $count=0; while($row1=$resultado1->fetch_assoc() ){ $count++; ?>
-
-	<label>El <strong><?php echo $row1['fecha'];?> a las:</strong></label>
-
-<a href="boletos.php?id=<?php echo $row1['pelicula'];?>&hora=<?php echo $row1['hora'];?>&fecha=<?php echo $row1['fecha'];?>&sala=<?php echo $row1['sala']; ?>">
-	<button id="AP"><strong><?php echo $row1['hora'];?> horas</strong></button></a> 
-	<p></p>
-
-
-<?php } if ($count>0) {
-  
-}else{?>
-
-				<label ><h5>No disponibles</h5></label><p></p>
-	 <?php } ?>
-</td>	
-		
-
-
-<tr>
-	<td align="right" colspan="3">
-		
-
-			<a href="index.php"><button id="CP"><strong>Cancelar</strong></button></a> 
-	</td>
-
-</tr>
-
-
-	
-		
-
-
-	</table>
-
-
-   
-        
-        <div class="col_2 right">
-         
-        </div>    
-        
-        <div class="clear"></div>
-    </div>
-    <div id="templatemo_footer">
-    <div class="col_2 left">Son las decisiones las que nos hacen ser quienes somos, y siempre podemos optar por hacer lo correcto.
-            <a href="#">CINEVERSE</a> |    <a href="#">Siguenos en Twitter</a> <br> 
-            Copyright©  <a href="#">CineVERSE</a>
-        </div> 
-    </div>
-</div>
-</div>
 </body>
 </html>
