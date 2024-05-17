@@ -1,0 +1,281 @@
+:root{
+    --dorado1--: rgb(96, 53, 18);
+    --dorado2--: rgb(200, 150, 41);
+    --dorado3--: rgb(250, 242, 144);
+    --negromate--: #0000;
+    --negro1--: #020403;
+    --negro2--: #212121;
+    --complemento--: #D3d3d3;
+    --blanco: #ffff;
+    --rojo: red;
+    --transparente-gris: rgba(255,255,255, 0.20);
+    --fuente: 'Poppins', sans-serif;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background: linear-gradient(rgba(5,7,12, 0.75), rgba(5,7,12, 0.75)), url("../img/fondo-index.jpeg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.title-form{
+    text-align: center;
+    font-size: 30px;
+}
+
+.form-register{
+	width: 450px;
+    background: #000000 ;
+	border-radius: 13%;
+    padding: 30px;
+    margin: auto;
+    margin-top: 5%;
+    border-radius: 10px;
+    font-family: var(--font);
+    color: white;
+
+
+	box-shadow: 0 0 5px        var(--dorado3--)    , 0 0 30px         var(--dorado3--)     , 0 0 50px     var(--dorado3--)    ;
+
+}
+
+.controls{
+	width: 100%;
+	background: #000000;
+	padding: 10px;
+	border-radius: 4px;
+	margin-bottom: 16px;
+	border: 1px solid   var(--dorado3--)  ;
+	font-family: 'poppins';
+	font-size: 18px;
+	color: white;
+	margin-top: 3%;
+}
+
+/*Efecto boton*/
+
+input[type="text"],
+input[type="number"]{
+    right: 20px;
+    font-size: 20px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-width: 0.3rem;
+    border-bottom: var(--dorado3--) solid;
+    background-color: #000;
+    color: white;
+}
+input:focus{
+    outline: none;
+
+}
+
+.form-register a{
+	color:  var(--dorado3--) ;
+	text-decoration: none;
+
+}
+
+
+.form-register a:hover{
+	text-decoration: underline;
+
+}
+
+button{
+    cursor: pointer;
+}
+.btn-neon{
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    color: #fff;
+    letter-spacing: 4px;
+    text-decoration: none;
+    font-size: 24px;
+    overflow: hidden;
+    transition: 0.2s;
+    outline: none;
+    background: #000000;
+    border: none;
+    margin-top: 3%;
+}
+
+
+.btn-neon:hover{
+    background: #000000;
+    box-shadow: 0 0 3px  var(--dorado3--) , 0 0 30px  var(--dorado3--) , 0 0 40px  var(--dorado3--);
+    transition-delay: 1s;
+ }
+.btn-neon span{
+    position: absolute;
+    display: block;
+}
+#span1{
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent,  var(--dorado3--));
+ }
+ .btn-neon:hover #span1{
+    left: 100%;
+    transition: 1s;
+}
+ #span3{
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent  var(--dorado3--) );
+}
+ .btn-neon:hover #span3{
+    right: 100%;
+    transition: 1s;
+    transition-delay: 0.5s;
+}
+#span2{
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg,transparent, var(--dorado3--));
+}
+.btn-neon:hover #span2{
+    top: 100%;
+    transition: 1s;
+    transition-delay: 0.25s;
+}
+#span4{
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg,transparent, var(--dorado3--));
+}
+.btn-neon:hover #span4{
+    bottom: 100%;
+    transition: 1s;
+    transition-delay: 0.75s;
+}
+
+.logo{
+    width:350px;
+    height:145px;
+}
+
+.formulario__campo {
+border: none;
+border-width: 0.3rem;
+border-bottom: var(--dorado3--) solid;
+background-color: #000;
+color: gray;
+background-color: black;
+font-size: 1rem;
+padding: 1rem;
+appearance: none;
+text-align: left;
+font-size: 1.3rem;
+width: 100%;
+}
+
+.formulario__proveedor{
+    border: none;
+    border-width: 0.3rem;
+    border-bottom: var(--dorado3--) solid;
+    background-color: #000;
+    color: gray;
+    background-color: black;
+    font-size: 1rem;
+    padding: 1rem;
+    appearance: none;
+    text-align: left;
+    font-size: 1.3rem;
+    width: 100%;
+    }
+
+option{
+    color: white;
+}
+
+
+/* boton archivos */
+.imagen input{
+    display: none;
+}
+
+.imagen label{
+    display: block;
+    padding: 12px 10px;
+    border: none;
+    border-radius: 6px;
+    background-color:var(--dorado2--);
+    cursor: pointer;
+    width: 50%;
+    margin-top: 2%;
+    font-size: 1rem;
+    color: white;
+}
+
+#nombre-a{
+    text-align: center;
+    font-size: 0.9rem;
+    width: -10rem;
+}
+
+.imagen i{
+    font-size: 1.2rem;
+    margin-right: 7%;
+    color: rgb(255, 251, 251);
+}
+
+.trailers input{
+    display: none;
+}
+
+.trailers label{
+    display: block;
+    padding: 12px 10px;
+    border: none;
+    border-radius: 6px;
+    background-color:var(--dorado2--);
+    cursor: pointer;
+    width: 50%;
+    margin-top: 5%;
+    font-size: 1rem;
+    color: white;
+}
+
+
+
+.trailers i{
+    font-size: 1.2rem;
+    margin-right: 7%;
+    color: rgb(255, 255, 255);
+}
+
+#nombre-v{
+    font-size: 0.9rem;
+    text-align: center;
+    width: -10rem;
+}
+
+option{
+    text-transform: uppercase;
+    outline: none;
+}
+
+select{
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+}
