@@ -53,7 +53,6 @@ function clearText(field)
             <li><a href="index.php">Inicio</a></li>
             <li><a href="horarios.php">Horarios</a></li>
             <li><a href="proxim.php">Prox. Estrenos</a></li>
-           
             
             <li><a href="contacto.php">Contacto</a></li>
         </ul>
